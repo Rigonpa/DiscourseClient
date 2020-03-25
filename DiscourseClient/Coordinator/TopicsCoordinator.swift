@@ -73,7 +73,7 @@ extension TopicsCoordinator: TopicsCoordinatorDelegate {
         addTopicCoordinator.onTopicCreated = { [weak self] in
             guard let self = self else { return }
             
-            // Si ponemos las líneas 77 y 78 primero la tabla no se recarga a tiempo
+            // Si ponemos finish y removeChild antes de newTopicWasCreated la tabla no se recarga a tiempo:
             self.topicsViewModel?.newTopicWasCreated()
             addTopicCoordinator.finish()
             self.removeChildCoordinator(addTopicCoordinator)

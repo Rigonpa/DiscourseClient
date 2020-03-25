@@ -15,4 +15,5 @@ protocol DiscourseClientRemoteDataManager {
     func deleteTopic(id: Int, completion: @escaping (Result<DeleteTopicResponse, Error>) -> ())
     //func addTopic(title: String, raw: String, createdAt: String, completion: @escaping (Result<AddNewTopicResponse, Error>) -> ())
     func addTopic(title: String, raw: String, completion: @escaping (Result<AddNewTopicResponse, Error>) -> ())
+    func fetchCategories(completion: @escaping (Result<CategoriesResponse, Error>) -> ())
 }

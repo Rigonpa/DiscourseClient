@@ -46,3 +46,11 @@ extension DiscourseClientDataManager: AddTopicDataManager {
         remoteDataManager.addTopic(title: title, raw: raw, completion: completion)
     }
 }
+
+extension DiscourseClientDataManager: CategoriesDataManager {
+    func fetchCategories(completion: @escaping (Result<CategoriesResponse, Error>) -> ()) {
+        remoteDataManager.fetchCategories(completion: completion)
+    }
+    
+    
+}
