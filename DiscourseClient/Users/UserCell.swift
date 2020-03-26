@@ -20,5 +20,4 @@ class UserCell: UITableViewCell {
             }
         }
     }
-    
 }

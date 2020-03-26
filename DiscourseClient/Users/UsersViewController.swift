@@ -63,6 +63,7 @@ class UsersViewController: UIViewController {
 
 extension UsersViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.didSelectRow(indexPath: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -82,6 +83,7 @@ extension UsersViewController: UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as? UserCell,
             let cellViewModel = viewModel.setCellForRow(indexPath: indexPath.row) {
             cell.viewModel = cellViewModel
+//            cell.setNeedsLayout() // No sé por qué no funciona
             return cell
         }
         fatalError()

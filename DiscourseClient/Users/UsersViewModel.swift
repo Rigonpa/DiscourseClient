@@ -9,7 +9,7 @@
 import Foundation
 
 protocol UsersCoordinatorDelegate {
-    func didSelect()
+    func didSelect(username: String)
 }
 
 protocol UsersViewDelegate {
@@ -55,6 +55,10 @@ class UsersViewModel {
     
     func setCellForRow(indexPath: Int) -> UsersCellViewModel? {
         return users[indexPath]
+    }
+    
+    func didSelectRow(indexPath: Int) {
+        coordinatorDelegate?.didSelect(username: users[indexPath].usernameLabel!)
     }
     
     

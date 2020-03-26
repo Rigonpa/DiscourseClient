@@ -59,3 +59,10 @@ extension DiscourseClientDataManager: UsersDataManager {
         remoteDataManager.fetchUsers(completion: completion)
     }
 }
+
+extension DiscourseClientDataManager: UserDetailDataManager {
+   
+    func fetchUser(username: String, completion: @escaping (Result<SingleUserResponse, Error>) -> Void) {
+        remoteDataManager.fetchUser(username: username, completion: completion)
+    }
+}

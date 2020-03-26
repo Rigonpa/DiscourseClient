@@ -66,4 +66,11 @@ class DiscourseClientRemoteDataManagerImpl: DiscourseClientRemoteDataManager {
         }
     }
     
+    func fetchUser(username: String, completion: @escaping (Result<SingleUserResponse, Error>) -> ()) {
+        let request = SingleUserRequest(username: username)
+        session.send(request: request) { (result) in
+            completion(result)
+        }
+    }
+
 }
