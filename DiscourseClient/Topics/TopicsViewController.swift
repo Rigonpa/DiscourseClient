@@ -37,6 +37,7 @@ class TopicsViewController: UIViewController {
         view = UIView()
 
         view.addSubview(tableView)
+        tableView.backgroundColor = .white
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),

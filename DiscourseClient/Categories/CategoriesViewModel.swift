@@ -20,7 +20,7 @@ protocol CategoriesViewDelegate {
 /// ViewModel representando un listado de categorías
 class CategoriesViewModel {
     let categoriesDataManager: CategoriesDataManager
-    var categories: [Category] = []
+    var categories: [CategoriesCellViewModel] = []
     var viewDelegate: CategoriesViewDelegate?
     var coordinatorDelegate: CategoriesCoordinatorDelegate?
     
@@ -37,7 +37,7 @@ class CategoriesViewModel {
                 self.viewDelegate?.errorFetchingCategories()
             case .success(let categoriesResponse):
                 for each in 0...categoriesResponse.categoryList.categories.count - 1 {
-                    self.categories.append(categoriesResponse.categoryList.categories[each])
+                    self.categories.append(CategoriesCellViewModel(category: categoriesResponse.categoryList.categories[each]))
                 }
                 self.viewDelegate?.categoriesFetched()
             }
@@ -56,8 +56,8 @@ class CategoriesViewModel {
         return categories.count
     }
     
-    func setCellForRow(indexPath: Int) -> String {
-        return categories[indexPath].name
+    func setCellForRow(indexPath: Int) -> CategoriesCellViewModel? {
+        return categories[indexPath]
     }
     
 }

@@ -51,6 +51,11 @@ extension DiscourseClientDataManager: CategoriesDataManager {
     func fetchCategories(completion: @escaping (Result<CategoriesResponse, Error>) -> ()) {
         remoteDataManager.fetchCategories(completion: completion)
     }
+}
+
+extension DiscourseClientDataManager: UsersDataManager {
     
-    
+    func fetchUsers(completion: @escaping (Result<UsersResponse, Error>) -> ()) {
+        remoteDataManager.fetchUsers(completion: completion)
+    }
 }

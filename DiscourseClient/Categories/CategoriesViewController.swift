@@ -16,8 +16,10 @@ class CategoriesViewController: UIViewController {
         let table = UITableView(frame: .zero, style: .grouped)
         table.dataSource = self
         table.delegate = self
+        table.register(UINib(nibName: "CategoryCell", bundle: nil), forCellReuseIdentifier: "CategoryCell")
         table.rowHeight = 100
         table.rowHeight = UITableView.automaticDimension
+        table.backgroundColor = .white
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -77,9 +79,21 @@ extension CategoriesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = viewModel.setCellForRow(indexPath: indexPath.row)
-        return cell
+        
+        /* Usando CategoriesCellViewModel pero no CategoryCell (ni .swift ni .xib)
+         let cell = UITableViewCell()
+         let cellViewModel = viewModel.setCellForRow(indexPath: indexPath.row)
+         cell.textLabel?.text = cellViewModel?.textLabelName
+         return cell
+         */
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as? CategoryCell,
+            let cellViewModel = viewModel.setCellForRow(indexPath: indexPath.row) {
+
+            cell.viewModel = cellViewModel
+            return cell
+        }
+        fatalError()
     }
 }
 
