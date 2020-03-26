@@ -9,13 +9,14 @@
 import Foundation
 
 protocol UserDetailCoordinatorDelegate: class {
-    func updateButtonTapped()
     func backButtonTapped()
+    func nameSuccessfullyUpdated()
 }
 
 protocol UserDetailViewDelegate: class {
     func singleUserFetched()
     func errorFetchingSingleUser()
+    func errorUpdatingName()
 }
 
 class UserDetailViewModel {
@@ -53,6 +54,22 @@ class UserDetailViewModel {
     
     func backButtonIsTapped() {
         coordinatorDelegate?.backButtonTapped()
+    }
+    
+    func onUserNameUpdated(name: String) {
+        coordinatorDelegate?.nameSuccessfullyUpdated()
+        userDetailDataManager.updateUserName(username: username, newName: name) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+                self.viewDelegate?.errorUpdatingName()
+            case .success(let updateUserNameResponse):
+                if updateUserNameResponse.success.lowercased() == "ok" {
+                    self.coordinatorDelegate?.nameSuccessfullyUpdated()
+                }
+            }
+        }
     }
 }
 

@@ -13,6 +13,7 @@ class UsersCoordinator: Coordinator {
     let presenter: UINavigationController
     let usersDataManager: UsersDataManager
     let userDetailDataManager: UserDetailDataManager
+    var usersViewModel: UsersViewModel?
     
     init(presenter: UINavigationController, usersDataManager: UsersDataManager, userDetailDataManager: UserDetailDataManager) {
         self.presenter = presenter
@@ -46,13 +47,13 @@ extension UsersCoordinator: UsersCoordinatorDelegate {
 }
 
 extension UsersCoordinator: UserDetailCoordinatorDelegate {
+    func nameSuccessfullyUpdated() {
+        presenter.popViewController(animated: true)
+        usersViewModel?.nameIsUpdated()
+    }
+    
     func backButtonTapped() {
         presenter.popViewController(animated: true)
     }
-    
-    func updateButtonTapped() {
-        
-    }
-    
-    
+
 }

@@ -61,7 +61,11 @@ extension DiscourseClientDataManager: UsersDataManager {
 }
 
 extension DiscourseClientDataManager: UserDetailDataManager {
-   
+    
+    func updateUserName(username: String, newName: String, completion: @escaping (Result<UpdateUserNameResponse, Error>) -> Void) {
+        remoteDataManager.updateUserName(username: username, newName: newName, completion: completion)
+    }
+    
     func fetchUser(username: String, completion: @escaping (Result<SingleUserResponse, Error>) -> Void) {
         remoteDataManager.fetchUser(username: username, completion: completion)
     }

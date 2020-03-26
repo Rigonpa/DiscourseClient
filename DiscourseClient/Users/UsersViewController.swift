@@ -91,6 +91,7 @@ extension UsersViewController: UITableViewDataSource {
 }
 
 extension UsersViewController: UsersViewDelegate {
+    
     func usersFetched() {
         updateUI()
     }

@@ -185,12 +185,18 @@ class UserDetailViewController: UIViewController {
     }
     
     fileprivate func showErrorFetchingSingleUserAlert(){
-        let message = NSLocalizedString("Failed to present the user's details", comment: "")
+        let message = NSLocalizedString("Failed to present the user's details \nPlease try again", comment: "")
+        showAlert(message)
+    }
+    
+    fileprivate func showErrorUpdatingNameAlert(){
+        let message = NSLocalizedString("Failed to update user name \nPlease try again", comment: "")
         showAlert(message)
     }
     
     @objc func updateButtonTapped() {
-        
+        guard let newName = nameEditableValue.text else { return }
+        viewModel.onUserNameUpdated(name: newName)
     }
     
     @objc func backButtonTapped() {
@@ -199,6 +205,10 @@ class UserDetailViewController: UIViewController {
 }
 
 extension UserDetailViewController: UserDetailViewDelegate {
+    func errorUpdatingName() {
+        showErrorUpdatingNameAlert()
+    }
+    
     func singleUserFetched() {
         updateUI()
     }
