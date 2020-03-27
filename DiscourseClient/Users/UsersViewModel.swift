@@ -62,18 +62,6 @@ class UsersViewModel {
     }
     
     func nameIsUpdated() {
-        usersDataManager.fetchUsers { [weak self] (result) in
-            guard let self = self else { return }
-            switch result {
-            case .failure(let error):
-                print(error.localizedDescription)
-                self.viewDelegate?.errorFetchingUsers()
-            case .success(let usersResponse):
-                for each in 0...usersResponse.directoryItems.count - 1 {
-                    self.users.append(UsersCellViewModel(user: usersResponse.directoryItems[each].user))
-                }
-                self.viewDelegate?.usersFetched()
-            }
-        }
+        self.viewDelegate?.usersFetched()
     }
 }
