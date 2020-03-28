@@ -67,8 +67,9 @@ class TopicDetailViewModel {
                 self.coordinatorDelegate?.topicDetailDeleteButtonTapped()
             }
         }
+        coordinatorDelegate?.topicDetailDeleteButtonTapped()
         
-        /* Solución propia para respuesta nil de delete topic.
+        /* Solución propia para respuesta nil de delete topic:
         
         topicDetailDataManager.deleteTopic(id: topicID) { [weak self] (result) in
             guard let self = self else { return }
@@ -91,8 +92,6 @@ class TopicDetailViewModel {
         }
         
         */
-        
-        coordinatorDelegate?.topicDetailDeleteButtonTapped()
     }
 
     func backButtonTapped() {

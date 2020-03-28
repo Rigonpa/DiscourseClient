@@ -14,9 +14,11 @@ class UserCell: UITableViewCell {
         didSet {
             guard let viewModel = viewModel else { return }
             textLabel?.text = viewModel.usernameLabel
+
             if let imageData = viewModel.avatarData {
                 imageView?.image = UIImage(data: imageData)
             }
+
             viewModel.viewDelegate = self
             
             

@@ -8,20 +8,16 @@
 
 import Foundation
 
-// TODO: Implementar las propiedades de esta request
 struct CreateTopicRequest: APIRequest {
     
     typealias Response = AddNewTopicResponse
     
     let title: String
     let raw: String
-    //let createdAt: String
-    
-    //init(title: String, raw: String, createdAt: String) {
+
     init(title: String, raw: String) {
         self.title = title
         self.raw = raw
-        //self.createdAt = createdAt
     }
     
     var method: Method {

@@ -46,11 +46,5 @@ class AddTopicViewModel {
                     self.viewDelegate?.errorAddingTopic()
             }
         }
-
-        /** TODO: DONE ALCAPONE
-         Realizar la llamada addTopic sobre el dataManager.
-         Si el resultado es success, avisar al coordinator
-         Si la llamada falla, avisar al viewDelegate
-         */
     }
 }

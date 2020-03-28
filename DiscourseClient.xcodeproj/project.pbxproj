@@ -180,9 +180,9 @@
 		62015CD923EF300200673EBB /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				9346CB4A242AA9A1009CFDBB /* CategoriesDataManager.swift */,
 				62015CDA23EF301300673EBB /* CategoriesViewModel.swift */,
 				62015CDC23EF302900673EBB /* CategoriesViewController.swift */,
+				9346CB4A242AA9A1009CFDBB /* CategoriesDataManager.swift */,
 				9346CB59242BD227009CFDBB /* CategoriesCellViewModel.swift */,
 				9346CB5D242BE08E009CFDBB /* CategoryCell.swift */,
 				9346CB5E242BE08E009CFDBB /* CategoryCell.xib */,
@@ -327,9 +327,9 @@
 		9346CB50242BA1BE009CFDBB /* Users */ = {
 			isa = PBXGroup;
 			children = (
-				9346CB51242BA1EE009CFDBB /* UsersDataManager.swift */,
 				9346CB53242BA1FF009CFDBB /* UsersViewModel.swift */,
 				9346CB55242BA21F009CFDBB /* UsersViewController.swift */,
+				9346CB51242BA1EE009CFDBB /* UsersDataManager.swift */,
 				9346CB61242BE8F2009CFDBB /* UsersCellViewModel.swift */,
 				9346CB63242BE902009CFDBB /* UserCell.swift */,
 				9346CB64242BE902009CFDBB /* UserCell.xib */,

@@ -16,6 +16,5 @@ class TopicCellViewModel {
     init(topic: Topic) {
         self.topic = topic
         textLabelText = topic.title
-        // TODO: Asignar textLabelText, el título del topic
     }
 }

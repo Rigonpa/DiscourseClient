@@ -47,13 +47,7 @@ class TopicsViewModel {
                 }
                 self.viewDelegate?.topicsFetched()
             }
-            
         }
-        /** TODO: DONE ALCAPONE
-         Recuperar el listado de latest topics del dataManager
-         Asignar el resultado a la lista de viewModels (que representan celdas de la interfaz
-         Avisar a la vista de que ya tenemos topics listos para pintar
-         */
     }
 
     func numberOfSections() -> Int {
@@ -95,9 +89,6 @@ class TopicsViewModel {
                 self.viewDelegate?.topicsFetched()
             }
         }
-        
-        // TODO:
-        //Seguramente debamos recuperar de nuevo los topics del datamanager, y pintarlos de nuevo
     }
     
     func updateTableAfterTopicDeleted() {

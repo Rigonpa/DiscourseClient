@@ -14,7 +14,7 @@ protocol UserViewCellDelegate {
 
 class UsersCellViewModel {
     let user: User
-    let usernameLabel: String?
+    var usernameLabel: String?
     var avatarData: Data?
     var viewDelegate: UserViewCellDelegate?
     //var imageClosure: (() -> Void)?

@@ -15,5 +15,4 @@ class CategoryCell: UITableViewCell {
             textLabel?.text = viewModel.textLabelName
         }
     }
-    
 }

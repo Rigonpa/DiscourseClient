@@ -50,12 +50,6 @@ extension TopicsCoordinator: TopicsCoordinatorDelegate {
         
         presenter.pushViewController(topicDetailViewController, animated: true)
 
-        /** TODO: Lanzar módulo TopicDetail
-         Para ello tendrás que crear TopicDetailViewModel, TopicDetailViewController.
-         Asignar "self" como coordinatorDelegate del módulo: Queremos escuchar eventos que requieren navegación desde ese módulo.
-         Asignar el VC al viewDelegate del VM. De esta forma, el VC se enterará de lo necesario para pintar la UI
-         Finalmente, lanzar el TopicDetailViewController sobre el presenter.
-         */
     }
 
     func topicsPlusButtonTapped() {

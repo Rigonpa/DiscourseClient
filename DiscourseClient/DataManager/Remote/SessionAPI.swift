@@ -77,26 +77,30 @@ final class SessionAPI {
                 }
             }
             
-            //            // Si vuelven datos, los intentamos decodificar
-            //            if let data = data, data.count > 0 {
-            //                do {
-            //                    let model = try JSONDecoder().decode(T.Response.self, from: data)
-            //                    DispatchQueue.main.async {
-            //                        completion(.success(model))
-            //                    }
-            //                } catch {
-            //                    DispatchQueue.main.async {
-            //                        completion(.failure(error))
-            //                    }
-            //                }
-            //            } else {
-            //                // Si no vuelven datos, pero tampoco hay error, lo consideramos success,
-            //                // para el caso de delete topic sobre todo.
-            //                DispatchQueue.main.async {
-            //                    completion(.success(nil))
-            //                }
-            //            }
-            
+            /*
+
+            // Si vuelven datos, los intentamos decodificar
+            if let data = data, data.count > 0 {
+                do {
+                    let model = try JSONDecoder().decode(T.Response.self, from: data)
+                    DispatchQueue.main.async {
+                        completion(.success(model))
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
+                }
+            } else {
+                // Si no vuelven datos, pero tampoco hay error, lo consideramos success,
+                // para el caso de delete topic sobre todo.
+                DispatchQueue.main.async {
+                    completion(.success(nil))
+                }
+            }
+             
+            */
+
         }
         task.resume()
     }
