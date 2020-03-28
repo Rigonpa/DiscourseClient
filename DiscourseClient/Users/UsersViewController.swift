@@ -51,7 +51,6 @@ class UsersViewController: UIViewController {
     
     fileprivate func updateUI() {
         tableview.reloadData()
-        tableview.setNeedsLayout()
     }
     
     fileprivate func showErrorFetchingUsersAlert() {
@@ -83,7 +82,6 @@ extension UsersViewController: UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as? UserCell,
             let cellViewModel = viewModel.setCellForRow(indexPath: indexPath.row) {
             cell.viewModel = cellViewModel
-//            cell.setNeedsLayout() // No sé por qué no funciona
             return cell
         }
         fatalError()
