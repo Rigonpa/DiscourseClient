@@ -37,6 +37,7 @@ class UsersViewModel {
                 print(error.localizedDescription)
                 self.viewDelegate?.errorFetchingUsers()
             case .success(let usersResponse):
+                guard let usersResponse = usersResponse else { return }
                 for each in 0...usersResponse.directoryItems.count - 1 {
                     self.users.append(UsersCellViewModel(user: usersResponse.directoryItems[each].user))
                 }

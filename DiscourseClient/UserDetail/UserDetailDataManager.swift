@@ -9,6 +9,6 @@
 import Foundation
 
 protocol UserDetailDataManager {
-    func fetchUser(username: String, completion: @escaping (Result<SingleUserResponse, Error>) -> Void)
-    func updateUserName(username: String, newName: String, completion: @escaping (Result<UpdateUserNameResponse, Error>) -> Void)
+    func fetchUser(username: String, completion: @escaping (Result<SingleUserResponse?, Error>) -> Void)
+    func updateUserName(username: String, newName: String, completion: @escaping (Result<UpdateUserNameResponse?, Error>) -> Void)
 }

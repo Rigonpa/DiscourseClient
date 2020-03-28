@@ -45,6 +45,7 @@ class TopicDetailViewModel {
                 print(error.localizedDescription)
                 self.viewDelegate?.errorFetchingTopicDetail()
             case .success(let singleTopicResponse):
+                guard let singleTopicResponse = singleTopicResponse else { return }
                 self.labelTopicIDText = "\(singleTopicResponse.id)"
                 self.labelTopicNameText = singleTopicResponse.title
                 self.topicIsDeletable = singleTopicResponse.details.canDelete
@@ -56,12 +57,25 @@ class TopicDetailViewModel {
     
     func deleteButtonTapped() {
         
+        topicDetailDataManager.deleteTopic(id: topicID) {[weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+                self.viewDelegate?.errorDeletingTopic()
+            case .success(_):
+                self.coordinatorDelegate?.topicDetailDeleteButtonTapped()
+            }
+        }
+        
+        /* Solución propia para respuesta nil de delete topic.
+        
         topicDetailDataManager.deleteTopic(id: topicID) { [weak self] (result) in
             guard let self = self else { return }
-            
+
             // result viene como error porque al hacer delete no da respuesta y en
             // sessionAPI, empty está capturado como error.
-            
+
             switch result {
             case .failure(let error):
                 // Plan b ya que no puedo poner if error == "emptyData":
@@ -76,7 +90,7 @@ class TopicDetailViewModel {
             }
         }
         
-        
+        */
         
         coordinatorDelegate?.topicDetailDeleteButtonTapped()
     }

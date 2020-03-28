@@ -9,5 +9,5 @@
 import Foundation
 
 protocol UsersDataManager {
-    func fetchUsers(completion: @escaping (Result<UsersResponse, Error>) -> ())
+    func fetchUsers(completion: @escaping (Result<UsersResponse?, Error>) -> ())
 }

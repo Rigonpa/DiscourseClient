@@ -43,6 +43,7 @@ class UserDetailViewModel {
                 print(error.localizedDescription)
                 self.viewDelegate?.errorFetchingSingleUser()
             case .success(let singleUserResponse):
+                guard let singleUserResponse = singleUserResponse else { return }
                 self.idValue = singleUserResponse.user.id
                 self.nameNoEditableValue = singleUserResponse.user.name ?? ""
                 self.usernameValue = singleUserResponse.user.username
@@ -65,6 +66,7 @@ class UserDetailViewModel {
                 print(error.localizedDescription)
                 self.viewDelegate?.errorUpdatingName()
             case .success(let updateUserNameResponse):
+                guard let updateUserNameResponse = updateUserNameResponse else { return }
                 if updateUserNameResponse.success.lowercased() == "ok" {
                     self.coordinatorDelegate?.nameSuccessfullyUpdated()
                 }

@@ -41,6 +41,7 @@ class TopicsViewModel {
                 print(error.localizedDescription)
                 self.viewDelegate?.errorFetchingTopics()
             case .success(let latestTopicsResponse):
+                guard let latestTopicsResponse = latestTopicsResponse else { return }
                 for each in 0...(latestTopicsResponse.topicList.topics.count - 1) {
                     self.topicViewModels.append(TopicCellViewModel(topic: latestTopicsResponse.topicList.topics[each]))
                 }
@@ -87,7 +88,7 @@ class TopicsViewModel {
 //                print(error.localizedDescription)
                 self.viewDelegate?.errorFetchingTopics()
             case .success(let latestTopicsResponse):
-                
+                guard let latestTopicsResponse = latestTopicsResponse else { return }
                 for each in 0...latestTopicsResponse.topicList.topics.count - 1 {
                     self.topicViewModels.append(TopicCellViewModel(topic: latestTopicsResponse.topicList.topics[each]))
                 }
@@ -109,6 +110,7 @@ class TopicsViewModel {
                 print(error.localizedDescription)
                 self.viewDelegate?.errorFetchingTopics()
             case .success(let latestTopicsResponse):
+                guard let latestTopicsResponse = latestTopicsResponse else { return }
                 for each in 0...latestTopicsResponse.topicList.topics.count - 1 {
                     self.topicViewModels.append(TopicCellViewModel(topic: latestTopicsResponse.topicList.topics[each]))
                 }

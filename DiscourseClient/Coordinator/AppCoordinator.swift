@@ -9,7 +9,7 @@
 import UIKit
 
 /// Coordinator principal de la app. Encapsula todas las interacciones con la Window.
-/// Tiene dos hijos, el topic list, y el categories list (uno por cada tab)
+/// Tiene tres hijos, el topic list, el categories list y el users list (uno por cada tab item)
 class AppCoordinator: Coordinator {
     let sessionAPI = SessionAPI()
 

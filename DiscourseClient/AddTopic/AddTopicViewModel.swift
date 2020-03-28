@@ -37,6 +37,7 @@ class AddTopicViewModel {
         self.dataManager.addTopic(title: title, raw: "\(title) - raw") { (result) in
             switch result {
                 case .success(let addNewTopicResponse):
+                    guard let addNewTopicResponse = addNewTopicResponse else { return }
                     if addNewTopicResponse.id != 0 {
                         self.coordinatorDelegate?.topicSuccessfullyAdded()
                     }

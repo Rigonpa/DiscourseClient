@@ -36,6 +36,7 @@ class CategoriesViewModel {
                 print(error.localizedDescription)
                 self.viewDelegate?.errorFetchingCategories()
             case .success(let categoriesResponse):
+                guard let categoriesResponse = categoriesResponse else { return }
                 for each in 0...categoriesResponse.categoryList.categories.count - 1 {
                     self.categories.append(CategoriesCellViewModel(category: categoriesResponse.categoryList.categories[each]))
                 }

@@ -9,5 +9,5 @@
 import Foundation
 
 protocol CategoriesDataManager {
-    func fetchCategories(completion: @escaping (Result<CategoriesResponse, Error>) -> ())
+    func fetchCategories(completion: @escaping (Result<CategoriesResponse?, Error>) -> ())
 }
