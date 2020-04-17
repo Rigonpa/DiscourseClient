@@ -131,6 +131,13 @@ class TopicDetailViewController: UIViewController {
         labelTopicTitle.text = viewModel.labelTopicNameText
         topicIDStackView.isHidden = false
         topicNameStackView.isHidden = false
+        /*
+         No está mal hacerlo asím pero para ser más fiel a MVVM, te propondría añadir
+         una propiedad deleteButtonIsHidden en el viewModel, de forma que la consultarías
+         igual que lo haces por ejemplo con labelTopicID.text = viewModel.labelTopicIDText.
+         De esta forma movemos esta lógica fuera del ViewController al ViewModel, donde
+         podemos añadir unit tests en el futuro 💪
+         */
         if let topicDeletable = viewModel.topicIsDeletable, let topicClosed = viewModel.topicIsClosed {
             if topicDeletable && !topicClosed {
                 deleteButton.isHidden = false

@@ -173,6 +173,15 @@ class UserDetailViewController: UIViewController {
         idValue.text = "\(viewModel.idValue!)"
         usernameStackView.isHidden = false
         usernameValue.text = viewModel.usernameValue
+        /*
+         Te comento aquí lo mismo que en TopicDetailViewController.
+         No está mal hacerlo así pero para ser más fiel a MVVM, te propondría añadir
+         propiedades nameEditableStackViewIsHidden, updateButtonIsHidden, nameNoEditableStackViewIsHidden,
+         usernameStackViewIsHidden en el viewModel, de forma que las consultarías
+         igual que lo haces por ejemplo con usernameValue.text = viewModel.usernameValue.
+         De esta forma movemos esta lógica fuera del ViewController al ViewModel, donde
+         podemos añadir unit tests en el futuro 💪
+         */
         if let editName = viewModel.nameIsEditableBool {
             if editName {
                 nameEditableStackView.isHidden = false

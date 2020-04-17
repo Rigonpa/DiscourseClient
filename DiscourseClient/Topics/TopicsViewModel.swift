@@ -21,6 +21,10 @@ protocol TopicsViewDelegate: class {
 }
 
 /// ViewModel que representa un listado de topics
+/*
+ Para no copiar y pegar tanto código, te propondría meter lo que se repite en una función,
+ y llamarla desde donde sea necesario
+ */
 class TopicsViewModel {
     weak var coordinatorDelegate: TopicsCoordinatorDelegate?
     weak var viewDelegate: TopicsViewDelegate?
@@ -32,10 +36,13 @@ class TopicsViewModel {
     }
 
     func viewWasLoaded() {
-        
+        fetchTopicsAndUpdateUI()
+    }
+
+    fileprivate func fetchTopicsAndUpdateUI() {
         self.topicsDataManager.fetchAllTopics { [weak self] (result) in
             guard let self = self else { return }
-            
+
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
@@ -73,40 +80,12 @@ class TopicsViewModel {
     }
 
     func newTopicWasCreated() {
-        
         topicViewModels.removeAll()
-        self.topicsDataManager.fetchAllTopics { [weak self] (result) in
-        guard let self = self else { return }
-            switch result {
-            case .failure(_):
-//                print(error.localizedDescription)
-                self.viewDelegate?.errorFetchingTopics()
-            case .success(let latestTopicsResponse):
-                guard let latestTopicsResponse = latestTopicsResponse else { return }
-                for each in 0...latestTopicsResponse.topicList.topics.count - 1 {
-                    self.topicViewModels.append(TopicCellViewModel(topic: latestTopicsResponse.topicList.topics[each]))
-                }
-                self.viewDelegate?.topicsFetched()
-            }
-        }
+        fetchTopicsAndUpdateUI()
     }
     
     func updateTableAfterTopicDeleted() {
-        
         topicViewModels.removeAll()
-        self.topicsDataManager.fetchAllTopics { [weak self] (result) in
-        guard let self = self else { return }
-            switch result {
-            case .failure(let error):
-                print(error.localizedDescription)
-                self.viewDelegate?.errorFetchingTopics()
-            case .success(let latestTopicsResponse):
-                guard let latestTopicsResponse = latestTopicsResponse else { return }
-                for each in 0...latestTopicsResponse.topicList.topics.count - 1 {
-                    self.topicViewModels.append(TopicCellViewModel(topic: latestTopicsResponse.topicList.topics[each]))
-                }
-                self.viewDelegate?.topicsFetched()
-            }
-        }
+        fetchTopicsAndUpdateUI()
     }
 }

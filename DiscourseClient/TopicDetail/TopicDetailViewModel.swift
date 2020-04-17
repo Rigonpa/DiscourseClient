@@ -56,7 +56,10 @@ class TopicDetailViewModel {
     }
     
     func deleteButtonTapped() {
-        
+        /*
+         Cuidado porque aquí estás llamando 2 veces a topicDetailDeleteButtonTapped,
+         una cuando el dataManager contesta, y otra antes de que conteste.
+         */
         topicDetailDataManager.deleteTopic(id: topicID) {[weak self] (result) in
             guard let self = self else { return }
             switch result {
