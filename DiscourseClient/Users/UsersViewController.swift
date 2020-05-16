@@ -11,11 +11,11 @@ import UIKit
 class UsersViewController: UIViewController {
     
     lazy var tableview: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
+        let table = UITableView(frame: .zero, style: .plain)
         table.delegate = self
         table.dataSource = self
         table.translatesAutoresizingMaskIntoConstraints = false
-        table.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
+        table.register(UserCell.self, forCellReuseIdentifier: UserCell.cellIdentifier)
         table.backgroundColor = .white
         table.rowHeight = UITableView.automaticDimension
         return table
@@ -79,7 +79,7 @@ extension UsersViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as? UserCell,
+        if let cell = tableView.dequeueReusableCell(withIdentifier: UserCell.cellIdentifier, for: indexPath) as? UserCell,
             let cellViewModel = viewModel.setCellForRow(indexPath: indexPath.row) {
             cell.viewModel = cellViewModel
             return cell

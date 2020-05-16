@@ -10,6 +10,15 @@ import UIKit
 
 /// ViewController representando un formulario de entrada para crear un topic
 class AddTopicViewController: UIViewController {
+    
+    lazy var imageUrlTextField: UITextField = {
+        let tf = UITextField()
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        tf.borderStyle = .line
+        tf.placeholder = NSLocalizedString("Insert topic image url and tap Submit", comment: "")
+        return tf
+    }()
+    
     lazy var textField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -34,11 +43,19 @@ class AddTopicViewController: UIViewController {
         view = UIView()
         view.backgroundColor = .white
 
+        view.addSubview(imageUrlTextField)
         view.addSubview(textField)
+        
         NSLayoutConstraint.activate([
-            textField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            textField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
-            textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16)
+            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+        ])
+        
+        NSLayoutConstraint.activate([
+            imageUrlTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            imageUrlTextField.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 16),
+            imageUrlTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
         ])
 
         let submitButton = UIButton(type: .system)
@@ -52,7 +69,7 @@ class AddTopicViewController: UIViewController {
         NSLayoutConstraint.activate([
             submitButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             submitButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
-            submitButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 8)
+            submitButton.topAnchor.constraint(equalTo: imageUrlTextField.bottomAnchor, constant: 8)
         ])
 
         let rightBarButtonItem: UIBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "multiply"), style: .plain, target: self, action: #selector(cancelButtonTapped))
@@ -65,8 +82,8 @@ class AddTopicViewController: UIViewController {
     }
 
     @objc fileprivate func submitButtonTapped() {
-        guard let text = textField.text, !text.isEmpty else { return }
-        viewModel.submitButtonTapped(title: text)
+        guard let text = textField.text, !text.isEmpty, let imageUrlString = imageUrlTextField.text else { return }
+        viewModel.submitButtonTapped(title: text, imageUrl: imageUrlString)
     }
 
     fileprivate func showErrorAddingTopicAlert() {

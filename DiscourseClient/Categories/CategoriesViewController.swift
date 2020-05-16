@@ -13,12 +13,10 @@ class CategoriesViewController: UIViewController {
     let viewModel: CategoriesViewModel
     
     lazy var tableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
+        let table = UITableView(frame: .zero, style: .plain)
         table.dataSource = self
         table.delegate = self
-        table.register(UINib(nibName: "CategoryCell", bundle: nil), forCellReuseIdentifier: "CategoryCell")
-        table.rowHeight = 100
-        table.rowHeight = UITableView.automaticDimension
+        table.register(CategoryCell.self, forCellReuseIdentifier: CategoryCell.cellIdentifier)
         table.backgroundColor = .white
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
@@ -79,7 +77,7 @@ extension CategoriesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as? CategoryCell,
+        if let cell = tableView.dequeueReusableCell(withIdentifier: CategoryCell.cellIdentifier, for: indexPath) as? CategoryCell,
             let cellViewModel = viewModel.setCellForRow(indexPath: indexPath.row) {
 
             cell.viewModel = cellViewModel

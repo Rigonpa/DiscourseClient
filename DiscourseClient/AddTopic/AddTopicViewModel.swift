@@ -32,7 +32,7 @@ class AddTopicViewModel {
         coordinatorDelegate?.addTopicCancelButtonTapped()
     }
 
-    func submitButtonTapped(title: String) {
+    func submitButtonTapped(title: String, imageUrl: String?) {
         
         self.dataManager.addTopic(title: title, raw: "\(title) - raw") { (result) in
             switch result {

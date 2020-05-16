@@ -19,10 +19,14 @@ struct Topic: Codable {
     let id: Int
     let title: String
     let postsCount: Int
+    let createdAt: String
+    let views: Int
     
     enum CodingKeys: String, CodingKey {
         case id
         case title
         case postsCount = "posts_count"
+        case createdAt = "created_at"
+        case views
     }
 }

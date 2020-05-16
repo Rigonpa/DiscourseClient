@@ -1,5 +1,5 @@
 //
-//  TopicCellViewModel.swift
+//  WelcomeCellViewModel.swift
 //  DiscourseClient
 //
 //  Created by Ricardo González Pacheco on 16/05/2020.
@@ -8,6 +8,14 @@
 
 import Foundation
 
-class TopicCellViewModel {
+protocol TopicsViewModelDelegate {
+    
+}
+
+protocol WelcomeCellDelegate {
+    
+}
+
+class WelcomeCellViewModel: TopicCellViewModel {
     
 }

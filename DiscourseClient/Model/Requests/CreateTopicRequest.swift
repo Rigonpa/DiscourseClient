@@ -14,11 +14,12 @@ struct CreateTopicRequest: APIRequest {
     
     let title: String
     let raw: String
-
+    
     init(title: String, raw: String) {
         self.title = title
         self.raw = raw
     }
+
     
     var method: Method {
         return .POST
@@ -36,6 +37,10 @@ struct CreateTopicRequest: APIRequest {
         return [
             "title" : "\(title)",
             "raw" : "\(raw)"
+//            "raw" : "Image url: \(title)",
+//            "topic_slug" : "Image url: \(raw)",
+//            "image_url" : "\(imageUrl)",
+//            "topic_slug" : "https://ichef.bbci.co.uk/news/410/cpsprodpb/E5F6/production/_96907885_gettyimages-629387256.jpg"
         ]
     }
     

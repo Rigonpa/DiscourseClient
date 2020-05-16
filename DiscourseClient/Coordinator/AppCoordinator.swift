@@ -18,6 +18,9 @@ class AppCoordinator: Coordinator {
         return remoteDataManager
     }()
 
+    // This variable localDataManager is a LocalDataManagerImpl object. That is why
+    // in DCDataManager we can use only LocalDataManager and not LocalDataManagerImpl.
+    // DataManger does not know to DataManagerImpl but AppCoordinator does.
     lazy var localDataManager: DiscourseClientLocalDataManager = {
         let localDataManager = DiscourseClientLocalDataManagerImpl()
         return localDataManager

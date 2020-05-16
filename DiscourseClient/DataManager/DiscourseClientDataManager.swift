@@ -23,8 +23,10 @@ class DiscourseClientDataManager {
 }
 
 extension DiscourseClientDataManager: TopicsDataManager {
+    // func fetchAllTasks() en TaskApp de persistencia {
     func fetchAllTopics(completion: @escaping (Result<LatestTopicsResponse?, Error>) -> ()) {
         remoteDataManager.fetchAllTopics(completion: completion)
+        // database.fetchData() en TaskApp de persistencia {  } }
     }
 }
 

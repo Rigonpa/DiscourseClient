@@ -9,7 +9,7 @@
 import UIKit
 
 class UserCell: UITableViewCell {
-
+    static let cellIdentifier: String = String(describing: UserCell.self)
     var viewModel: UsersCellViewModel? {
         didSet {
             guard let viewModel = viewModel else { return }

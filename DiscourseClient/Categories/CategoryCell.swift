@@ -9,6 +9,7 @@
 import UIKit
 
 class CategoryCell: UITableViewCell {
+    static let cellIdentifier: String = String(describing: CategoryCell.self)
     var viewModel: CategoriesCellViewModel? {
         didSet {
             guard let viewModel = viewModel else { return }

@@ -12,13 +12,13 @@ import UIKit
 class TopicsViewController: UIViewController {
 
     lazy var tableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
+        let table = UITableView(frame: .zero, style: .plain)
         table.translatesAutoresizingMaskIntoConstraints = false
         table.dataSource = self
         table.delegate = self
-        table.register(UINib(nibName: "TopicCell", bundle: nil), forCellReuseIdentifier: "TopicCell")
-        table.estimatedRowHeight = 100
-        table.rowHeight = UITableView.automaticDimension
+//        table.register(UINib(nibName: "TopicCell", bundle: nil), forCellReuseIdentifier: "TopicCell")
+        table.register(TopicDataCell.self, forCellReuseIdentifier: TopicDataCell.cellIdentifier)
+        table.register(WelcomeCell.self, forCellReuseIdentifier: WelcomeCell.cellIdentifier)
         return table
     }()
 
@@ -76,17 +76,41 @@ extension TopicsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "TopicCell", for: indexPath) as? TopicCell,
-            let cellViewModel = viewModel.viewModel(at: indexPath) {
-            cell.viewModel = cellViewModel
-            return cell
+        switch indexPath.row {
+            case 0:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: WelcomeCell.cellIdentifier, for: indexPath) as? WelcomeCell,
+                    let cellViewModel = viewModel.viewModel(at: indexPath) as? WelcomeCellViewModel else { fatalError()}
+                cell.viewModel = cellViewModel
+                return cell
+            default:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: TopicDataCell.cellIdentifier, for: indexPath) as? TopicDataCell,
+                    let cellViewModel = viewModel.viewModel(at: indexPath) as? TopicDataCellViewModel else { fatalError()}
+                cell.viewModel = cellViewModel
+                return cell
         }
+//        if let cell = tableView.dequeueReusableCell(withIdentifier: TopicDataCell.cellIdentifier, for: indexPath) as? TopicDataCell,
+//            let cellViewModel = viewModel.viewModel(at: indexPath) as? TopicDataCellViewModel {
+//
+//            cell.viewModel = cellViewModel
+//            return cell
+//        } else if let cell = tableView.dequeueReusableCell(withIdentifier: WelcomeCell.cellIdentifier, for: indexPath) as? WelcomeCell,
+//            let cellViewModel = viewModel.viewModel(at: indexPath) as? WelcomeCellViewModel {
+//
+//            cell.viewModel = cellViewModel
+//            return cell
+//        }
 
-        fatalError()
+//        fatalError()
     }
 }
 
 extension TopicsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 150
+        }
+        return 50
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         viewModel.didSelectRow(at: indexPath)

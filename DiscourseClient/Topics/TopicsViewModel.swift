@@ -43,8 +43,9 @@ class TopicsViewModel {
             case .success(let latestTopicsResponse):
                 guard let latestTopicsResponse = latestTopicsResponse else { return }
                 for each in 0...(latestTopicsResponse.topicList.topics.count - 1) {
-                    self.topicViewModels.append(TopicCellViewModel(topic: latestTopicsResponse.topicList.topics[each]))
+                    self.topicViewModels.append(TopicDataCellViewModel(topic: latestTopicsResponse.topicList.topics[each]))
                 }
+                self.topicViewModels.insert(WelcomeCellViewModel(), at: 0)
                 self.viewDelegate?.topicsFetched()
             }
         }
@@ -64,8 +65,9 @@ class TopicsViewModel {
     }
 
     func didSelectRow(at indexPath: IndexPath) {
-        guard indexPath.row < topicViewModels.count else { return }  // Para evitar desbordamiento de array
-        coordinatorDelegate?.didSelect(topic: topicViewModels[indexPath.row].topic)
+        guard indexPath.row < topicViewModels.count else { return } // Para evitar desbordamiento de array
+        guard let topicCellViewModel = topicViewModels[indexPath.row] as? TopicDataCellViewModel else { return }
+        coordinatorDelegate?.didSelect(topic: topicCellViewModel.topic)
     }
 
     func plusButtonTapped() {
@@ -84,7 +86,7 @@ class TopicsViewModel {
             case .success(let latestTopicsResponse):
                 guard let latestTopicsResponse = latestTopicsResponse else { return }
                 for each in 0...latestTopicsResponse.topicList.topics.count - 1 {
-                    self.topicViewModels.append(TopicCellViewModel(topic: latestTopicsResponse.topicList.topics[each]))
+                    self.topicViewModels.append(TopicDataCellViewModel(topic: latestTopicsResponse.topicList.topics[each]))
                 }
                 self.viewDelegate?.topicsFetched()
             }
@@ -103,7 +105,7 @@ class TopicsViewModel {
             case .success(let latestTopicsResponse):
                 guard let latestTopicsResponse = latestTopicsResponse else { return }
                 for each in 0...latestTopicsResponse.topicList.topics.count - 1 {
-                    self.topicViewModels.append(TopicCellViewModel(topic: latestTopicsResponse.topicList.topics[each]))
+                    self.topicViewModels.append(TopicDataCellViewModel(topic: latestTopicsResponse.topicList.topics[each]))
                 }
                 self.viewDelegate?.topicsFetched()
             }
