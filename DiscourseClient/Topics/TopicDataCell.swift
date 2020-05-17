@@ -12,10 +12,11 @@ import UIKit
 class TopicDataCell: UITableViewCell {
     
     lazy var topicImageView: UIImageView = {
-        guard let image = UIImage(named: "defaultTopicImage") else { fatalError() }
+        guard let image = UIImage(named: "charmander") else { fatalError() }
         let iv = UIImageView()
         iv.image = image
         iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = 32
         iv.layer.borderWidth = 1
         iv.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor

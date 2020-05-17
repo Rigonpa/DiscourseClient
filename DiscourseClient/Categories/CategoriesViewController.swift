@@ -19,6 +19,7 @@ class CategoriesViewController: UIViewController {
         table.register(CategoryCell.self, forCellReuseIdentifier: CategoryCell.cellIdentifier)
         table.backgroundColor = .white
         table.translatesAutoresizingMaskIntoConstraints = false
+        table.tableFooterView = UIView()
         return table
     }()
 
@@ -30,9 +31,13 @@ class CategoriesViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    override func loadView() {
-        view = UIView()
+    
+    override func viewDidLoad() {
+        setupUI()
+        viewModel.viewDidLoad()
+    }
+    
+    private func setupUI() {
         view.backgroundColor = .white
 
         view.addSubview(tableView)
@@ -43,10 +48,6 @@ class CategoriesViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
-    }
-    
-    override func viewDidLoad() {
-        viewModel.viewDidLoad()
     }
     
     fileprivate func updateUI() {

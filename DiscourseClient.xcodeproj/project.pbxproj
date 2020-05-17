@@ -43,6 +43,7 @@
 		62A697A323E89BD600CCEA3E /* LatestTopicsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A697A223E89BD600CCEA3E /* LatestTopicsRequest.swift */; };
 		62A697A623E89C2200CCEA3E /* LatestTopicsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A697A523E89C2200CCEA3E /* LatestTopicsResponse.swift */; };
 		62A697A823E89E6700CCEA3E /* DiscourseClientLocalDataManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A697A723E89E6700CCEA3E /* DiscourseClientLocalDataManagerImpl.swift */; };
+		933E937E2471767300996B20 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933E937D2471767300996B20 /* UIImage+Extension.swift */; };
 		9346CB47242AA09A009CFDBB /* CategoriesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346CB46242AA09A009CFDBB /* CategoriesResponse.swift */; };
 		9346CB49242AA61C009CFDBB /* CategoriesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346CB48242AA61C009CFDBB /* CategoriesRequest.swift */; };
 		9346CB4B242AA9A1009CFDBB /* CategoriesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346CB4A242AA9A1009CFDBB /* CategoriesDataManager.swift */; };
@@ -112,6 +113,7 @@
 		62A697A223E89BD600CCEA3E /* LatestTopicsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestTopicsRequest.swift; sourceTree = "<group>"; };
 		62A697A523E89C2200CCEA3E /* LatestTopicsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestTopicsResponse.swift; sourceTree = "<group>"; };
 		62A697A723E89E6700CCEA3E /* DiscourseClientLocalDataManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscourseClientLocalDataManagerImpl.swift; sourceTree = "<group>"; };
+		933E937D2471767300996B20 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Extension.swift"; path = "../../../../../05. Persistencia, optimización, instrumentación/Mi práctica/AvengersApp/AvengersApp/AvengersApp/Extensions/UIImage+Extension.swift"; sourceTree = "<group>"; };
 		9346CB46242AA09A009CFDBB /* CategoriesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesResponse.swift; sourceTree = "<group>"; };
 		9346CB48242AA61C009CFDBB /* CategoriesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesRequest.swift; sourceTree = "<group>"; };
 		9346CB4A242AA9A1009CFDBB /* CategoriesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesDataManager.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 		62015CC923EF19E600673EBB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				933E937D2471767300996B20 /* UIImage+Extension.swift */,
 				93FE0453247064E000735C14 /* UIFont+Additions.swift */,
 				93FE045124704B6900735C14 /* UIColor+Additions.swift */,
 				62015CCA23EF19F500673EBB /* UIViewController+Extensions.swift */,
@@ -480,6 +483,7 @@
 				9346CB6F242CA32A009CFDBB /* SingleUserResponse.swift in Sources */,
 				62015CB723EF04C200673EBB /* TopicDataCellViewModel.swift in Sources */,
 				9346CB49242AA61C009CFDBB /* CategoriesRequest.swift in Sources */,
+				933E937E2471767300996B20 /* UIImage+Extension.swift in Sources */,
 				9346CB4B242AA9A1009CFDBB /* CategoriesDataManager.swift in Sources */,
 				627DC5D823E60727006D8615 /* SessionAPI.swift in Sources */,
 				627DC5D123E604E7006D8615 /* DiscourseClientLocalDataManager.swift in Sources */,

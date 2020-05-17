@@ -15,6 +15,7 @@ class AddTopicViewController: UIViewController {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.borderStyle = .line
+        tf.isHidden = true
         tf.placeholder = NSLocalizedString("Insert topic image url and tap Submit", comment: "")
         return tf
     }()
@@ -69,7 +70,7 @@ class AddTopicViewController: UIViewController {
         NSLayoutConstraint.activate([
             submitButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             submitButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
-            submitButton.topAnchor.constraint(equalTo: imageUrlTextField.bottomAnchor, constant: 8)
+            submitButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 8)
         ])
 
         let rightBarButtonItem: UIBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "multiply"), style: .plain, target: self, action: #selector(cancelButtonTapped))

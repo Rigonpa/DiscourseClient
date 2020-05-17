@@ -19,6 +19,7 @@ class TopicsViewController: UIViewController {
 //        table.register(UINib(nibName: "TopicCell", bundle: nil), forCellReuseIdentifier: "TopicCell")
         table.register(TopicDataCell.self, forCellReuseIdentifier: TopicDataCell.cellIdentifier)
         table.register(WelcomeCell.self, forCellReuseIdentifier: WelcomeCell.cellIdentifier)
+        table.tableFooterView = UIView()
         return table
     }()
 
@@ -35,7 +36,18 @@ class TopicsViewController: UIViewController {
 
     override func loadView() {
         view = UIView()
+        let rightBarButtonItem: UIBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusButtonTapped))
+        rightBarButtonItem.tintColor = .black
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+        viewModel.viewWasLoaded()
+    }
+    
+    private func setupUI() {
         view.addSubview(tableView)
         tableView.backgroundColor = .white
         NSLayoutConstraint.activate([
@@ -44,16 +56,6 @@ class TopicsViewController: UIViewController {
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-
-
-        let rightBarButtonItem: UIBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusButtonTapped))
-        rightBarButtonItem.tintColor = .black
-        navigationItem.rightBarButtonItem = rightBarButtonItem
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        viewModel.viewWasLoaded()
     }
 
     @objc func plusButtonTapped() {
@@ -88,19 +90,6 @@ extension TopicsViewController: UITableViewDataSource {
                 cell.viewModel = cellViewModel
                 return cell
         }
-//        if let cell = tableView.dequeueReusableCell(withIdentifier: TopicDataCell.cellIdentifier, for: indexPath) as? TopicDataCell,
-//            let cellViewModel = viewModel.viewModel(at: indexPath) as? TopicDataCellViewModel {
-//
-//            cell.viewModel = cellViewModel
-//            return cell
-//        } else if let cell = tableView.dequeueReusableCell(withIdentifier: WelcomeCell.cellIdentifier, for: indexPath) as? WelcomeCell,
-//            let cellViewModel = viewModel.viewModel(at: indexPath) as? WelcomeCellViewModel {
-//
-//            cell.viewModel = cellViewModel
-//            return cell
-//        }
-
-//        fatalError()
     }
 }
 

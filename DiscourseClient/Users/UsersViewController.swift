@@ -17,7 +17,7 @@ class UsersViewController: UIViewController {
         table.translatesAutoresizingMaskIntoConstraints = false
         table.register(UserCell.self, forCellReuseIdentifier: UserCell.cellIdentifier)
         table.backgroundColor = .white
-        table.rowHeight = UITableView.automaticDimension
+        table.tableFooterView = UIView()
         return table
     }()
     
@@ -32,8 +32,12 @@ class UsersViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadView() {
-        view = UIView()
+    override func viewDidLoad() {
+        setupUI()
+        viewModel.viewDidLoad()
+    }
+    
+    private func setupUI() {
         view.backgroundColor = .white
         view.addSubview(tableview)
         
@@ -43,10 +47,6 @@ class UsersViewController: UIViewController {
             tableview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableview.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-    }
-    
-    override func viewDidLoad() {
-        viewModel.viewDidLoad()
     }
     
     fileprivate func updateUI() {

@@ -64,10 +64,24 @@ class AppCoordinator: Coordinator {
         tabBarController.tabBar.tintColor = .black
 
         tabBarController.viewControllers = [topicsNavigationController, categoriesNavigationController, usersNavigationController]
-        tabBarController.tabBar.items?.first?.image = UIImage(systemName: "list.dash")
-        tabBarController.tabBar.items?[1].image = UIImage(systemName: "tag")
-        tabBarController.tabBar.items?[2].image = UIImage(systemName: "person")
-
+        
+        let topicsImageSelected = UIImage(named: "home")?.withRenderingMode(.alwaysOriginal)
+        let topicsImageUnselected = UIImage(named: "homeUnselected")?.withRenderingMode(.alwaysOriginal)
+        let topicsTabBarItem: UITabBarItem = UITabBarItem(title: "Topics", image: topicsImageUnselected, selectedImage: topicsImageSelected)
+        topicsNavigationController.tabBarItem = topicsTabBarItem
+        
+        let categoriesImageSelected = UIImage(named: "categories")?.withRenderingMode(.alwaysOriginal)
+        let categoriesImageUnselected = UIImage(named: "categoriesUnselected")?.withRenderingMode(.alwaysOriginal)
+        let categoriesTabBarItem: UITabBarItem = UITabBarItem(title: "Categories", image: categoriesImageUnselected, selectedImage: categoriesImageSelected)
+        categoriesNavigationController.tabBarItem = categoriesTabBarItem
+//        categoriesNavigationController.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 5)
+//        categoriesNavigationController.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+        
+        let usersImageSelected = UIImage(named: "users")?.withRenderingMode(.alwaysOriginal)
+        let usersImageUnselected = UIImage(named: "usersUnselected")?.withRenderingMode(.alwaysOriginal)
+        let usersTabBarItem: UITabBarItem = UITabBarItem(title: "Users", image: usersImageUnselected, selectedImage: usersImageSelected)
+        usersNavigationController.tabBarItem = usersTabBarItem
+        
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
     }
