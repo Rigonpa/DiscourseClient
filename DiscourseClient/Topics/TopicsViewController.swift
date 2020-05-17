@@ -107,9 +107,9 @@ extension TopicsViewController: UITableViewDataSource {
 extension TopicsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return 150
+            return 151
         }
-        return 50
+        return 96
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

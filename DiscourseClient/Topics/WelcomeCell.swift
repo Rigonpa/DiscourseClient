@@ -44,7 +44,7 @@ class WelcomeCell: UITableViewCell {
 //        label.text = NSMutableAttributedString(attributedString: "Discourse Setup The first paragraph of this pinned topic...")
         label.text = NSLocalizedString("Discourse Setup The first paragraph of this pinned topic...", comment: "")
         label.numberOfLines = 2
-        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.font = UIFont(name: "SFProText-Regular", size: 17)
         return label
     }()
 
