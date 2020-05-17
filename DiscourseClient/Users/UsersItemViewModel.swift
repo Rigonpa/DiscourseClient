@@ -8,20 +8,17 @@
 
 import Foundation
 
-protocol UserViewCellDelegate {
+protocol UserViewItemDelegate {
     func userImageFetched()
 }
 
-class UsersCellViewModel {
+class UsersItemViewModel {
     let user: User
-    var usernameLabel: String?
     var avatarData: Data?
-    var viewDelegate: UserViewCellDelegate?
-    //var imageClosure: (() -> Void)?
+    var viewDelegate: UserViewItemDelegate?
     
     init(user: User) {
         self.user = user
-        usernameLabel = user.username
         avatarPathCompleted()
     }
     
@@ -37,7 +34,6 @@ class UsersCellViewModel {
             DispatchQueue.main.async {
                 self.avatarData = imageData
                 self.viewDelegate?.userImageFetched()
-                //self.imageClosure?()
             }
         }
     }

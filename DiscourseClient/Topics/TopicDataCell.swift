@@ -147,7 +147,7 @@ class TopicDataCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            secondValueBelow.leadingAnchor.constraint(equalTo: secondIconBelow.trailingAnchor, constant: 4),
+            secondValueBelow.leadingAnchor.constraint(equalTo: secondIconBelow.trailingAnchor, constant: 5),
             secondValueBelow.centerYAnchor.constraint(equalTo: firstIconBelow.centerYAnchor),
             secondValueBelow.widthAnchor.constraint(equalToConstant: 21),
             secondValueBelow.heightAnchor.constraint(equalToConstant: 20)

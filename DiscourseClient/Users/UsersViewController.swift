@@ -10,15 +10,23 @@ import UIKit
 
 class UsersViewController: UIViewController {
     
-    lazy var tableview: UITableView = {
-        let table = UITableView(frame: .zero, style: .plain)
-        table.delegate = self
-        table.dataSource = self
-        table.translatesAutoresizingMaskIntoConstraints = false
-        table.register(UserCell.self, forCellReuseIdentifier: UserCell.cellIdentifier)
-        table.backgroundColor = .white
-        table.tableFooterView = UIView()
-        return table
+    lazy var collectionView: UICollectionView = {
+        
+        let viewFlowLayout = UICollectionViewFlowLayout()
+        viewFlowLayout.itemSize = CGSize(width: 94, height: 124)
+        viewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 32)
+        viewFlowLayout.headerReferenceSize = CGSize(width: 375, height: 24)
+        viewFlowLayout.minimumInteritemSpacing = 0
+        viewFlowLayout.minimumLineSpacing = 19
+        
+        
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: viewFlowLayout)
+        collection.dataSource = self
+        collection.delegate = self
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.register(UserItem.self, forCellWithReuseIdentifier: UserItem.cellIdentifier)
+        collection.backgroundColor = .white
+        return collection
     }()
     
     let viewModel: UsersViewModel
@@ -39,18 +47,18 @@ class UsersViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .white
-        view.addSubview(tableview)
+        view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
-            tableview.topAnchor.constraint(equalTo: view.topAnchor),
-            tableview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableview.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
     
     fileprivate func updateUI() {
-        tableview.reloadData()
+        collectionView.reloadData()
     }
     
     fileprivate func showErrorFetchingUsersAlert() {
@@ -60,43 +68,38 @@ class UsersViewController: UIViewController {
 
 }
 
-extension UsersViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.didSelectRow(indexPath: indexPath.row)
-        tableView.deselectRow(at: indexPath, animated: true)
+extension UsersViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.didSelectRow(indexPath: indexPath.item)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 
-extension UsersViewController: UITableViewDataSource {
+extension UsersViewController: UICollectionViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return viewModel.sections()
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfRows()
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if let cell = tableView.dequeueReusableCell(withIdentifier: UserCell.cellIdentifier, for: indexPath) as? UserCell,
-            let cellViewModel = viewModel.setCellForRow(indexPath: indexPath.row) {
-            cell.viewModel = cellViewModel
-            return cell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let item = collectionView.dequeueReusableCell(withReuseIdentifier: UserItem.cellIdentifier, for: indexPath) as? UserItem,
+            let cellViewModel = viewModel.setCellForRow(indexPath: indexPath.item) {
+            item.viewModel = cellViewModel
+            return item
         }
         fatalError()
     }
 }
 
 extension UsersViewController: UsersViewDelegate {
-    
     func usersFetched() {
         updateUI()
     }
-    
     func errorFetchingUsers() {
         showErrorFetchingUsersAlert()
     }
-    
-    
 }

@@ -19,8 +19,7 @@ protocol UsersViewDelegate {
 
 class UsersViewModel {
     
-    var users: [UsersCellViewModel] = []
-    
+    var users: [UsersItemViewModel] = []
     let usersDataManager: UsersDataManager
     var coordinatorDelegate: UsersCoordinatorDelegate?
     var viewDelegate: UsersViewDelegate?
@@ -39,7 +38,7 @@ class UsersViewModel {
             case .success(let usersResponse):
                 guard let usersResponse = usersResponse else { return }
                 for each in 0...usersResponse.directoryItems.count - 1 {
-                    self.users.append(UsersCellViewModel(user: usersResponse.directoryItems[each].user))
+                    self.users.append(UsersItemViewModel(user: usersResponse.directoryItems[each].user))
                 }
                 self.viewDelegate?.usersFetched()
             }
@@ -54,12 +53,12 @@ class UsersViewModel {
         return users.count
     }
     
-    func setCellForRow(indexPath: Int) -> UsersCellViewModel? {
+    func setCellForRow(indexPath: Int) -> UsersItemViewModel? {
         return users[indexPath]
     }
     
     func didSelectRow(indexPath: Int) {
-        coordinatorDelegate?.didSelect(username: users[indexPath].usernameLabel!)
+        coordinatorDelegate?.didSelect(username: users[indexPath].user.username)
     }
     
     func nameIsUpdated() {

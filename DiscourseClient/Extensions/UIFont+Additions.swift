@@ -27,7 +27,7 @@ extension UIFont {
   }
 
   class var avatar: UIFont {
-    return UIFont.systemFont(ofSize: 15.0, weight: .medium)
+    return UIFont.systemFont(ofSize: 15.0, weight: .regular)
   }
 
   class var textoPequeO: UIFont {

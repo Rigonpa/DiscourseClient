@@ -55,8 +55,8 @@
 		9346CB58242BA238009CFDBB /* UsersCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346CB57242BA238009CFDBB /* UsersCoordinator.swift */; };
 		9346CB5A242BD227009CFDBB /* CategoriesCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346CB59242BD227009CFDBB /* CategoriesCellViewModel.swift */; };
 		9346CB5F242BE08E009CFDBB /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346CB5D242BE08E009CFDBB /* CategoryCell.swift */; };
-		9346CB62242BE8F2009CFDBB /* UsersCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346CB61242BE8F2009CFDBB /* UsersCellViewModel.swift */; };
-		9346CB65242BE902009CFDBB /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346CB63242BE902009CFDBB /* UserCell.swift */; };
+		9346CB62242BE8F2009CFDBB /* UsersItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346CB61242BE8F2009CFDBB /* UsersItemViewModel.swift */; };
+		9346CB65242BE902009CFDBB /* UserItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346CB63242BE902009CFDBB /* UserItem.swift */; };
 		9346CB69242CA28B009CFDBB /* UserDetailDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346CB68242CA28B009CFDBB /* UserDetailDataManager.swift */; };
 		9346CB6B242CA29E009CFDBB /* UserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346CB6A242CA29E009CFDBB /* UserDetailViewModel.swift */; };
 		9346CB6D242CA2AD009CFDBB /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346CB6C242CA2AD009CFDBB /* UserDetailViewController.swift */; };
@@ -125,8 +125,8 @@
 		9346CB57242BA238009CFDBB /* UsersCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCoordinator.swift; sourceTree = "<group>"; };
 		9346CB59242BD227009CFDBB /* CategoriesCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCellViewModel.swift; sourceTree = "<group>"; };
 		9346CB5D242BE08E009CFDBB /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
-		9346CB61242BE8F2009CFDBB /* UsersCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCellViewModel.swift; sourceTree = "<group>"; };
-		9346CB63242BE902009CFDBB /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		9346CB61242BE8F2009CFDBB /* UsersItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersItemViewModel.swift; sourceTree = "<group>"; };
+		9346CB63242BE902009CFDBB /* UserItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserItem.swift; sourceTree = "<group>"; };
 		9346CB68242CA28B009CFDBB /* UserDetailDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailDataManager.swift; sourceTree = "<group>"; };
 		9346CB6A242CA29E009CFDBB /* UserDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewModel.swift; sourceTree = "<group>"; };
 		9346CB6C242CA2AD009CFDBB /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
@@ -340,8 +340,8 @@
 				9346CB53242BA1FF009CFDBB /* UsersViewModel.swift */,
 				9346CB55242BA21F009CFDBB /* UsersViewController.swift */,
 				9346CB51242BA1EE009CFDBB /* UsersDataManager.swift */,
-				9346CB61242BE8F2009CFDBB /* UsersCellViewModel.swift */,
-				9346CB63242BE902009CFDBB /* UserCell.swift */,
+				9346CB61242BE8F2009CFDBB /* UsersItemViewModel.swift */,
+				9346CB63242BE902009CFDBB /* UserItem.swift */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -445,7 +445,7 @@
 				93C7513D242A342B009C4D75 /* DeleteTopicResponse.swift in Sources */,
 				62015CBD23EF0C6700673EBB /* TopicsCoordinator.swift in Sources */,
 				62A697A623E89C2200CCEA3E /* LatestTopicsResponse.swift in Sources */,
-				9346CB65242BE902009CFDBB /* UserCell.swift in Sources */,
+				9346CB65242BE902009CFDBB /* UserItem.swift in Sources */,
 				627DC5CF23E604D2006D8615 /* DiscourseClientRemoteDataManager.swift in Sources */,
 				9346CB69242CA28B009CFDBB /* UserDetailDataManager.swift in Sources */,
 				627DC5C523E5FEFD006D8615 /* TopicsViewController.swift in Sources */,
@@ -453,7 +453,7 @@
 				627DC5D323E605E5006D8615 /* DiscourseClientRemoteDataManagerImpl.swift in Sources */,
 				62015CBA23EF084C00673EBB /* TopicDataCell.swift in Sources */,
 				9346CB71242CA66F009CFDBB /* SingleUserRequest.swift in Sources */,
-				9346CB62242BE8F2009CFDBB /* UsersCellViewModel.swift in Sources */,
+				9346CB62242BE8F2009CFDBB /* UsersItemViewModel.swift in Sources */,
 				93C7513F242A358D009C4D75 /* DeleteTopicRequest.swift in Sources */,
 				62015CCB23EF19F500673EBB /* UIViewController+Extensions.swift in Sources */,
 				62015CD823EF26C900673EBB /* AddTopicCoordinator.swift in Sources */,
