@@ -12,10 +12,9 @@ import UIKit
 class TopicDataCell: UITableViewCell {
     
     lazy var topicImageView: UIImageView = {
-        guard let image = UIImage(named: "charmander") else { fatalError() }
         let iv = UIImageView()
-        iv.image = image
         iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.alpha = 0
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = 32
         iv.layer.borderWidth = 1
@@ -36,16 +35,15 @@ class TopicDataCell: UITableViewCell {
         guard let image = UIImage(named: "icoSmallAnswers") else { fatalError() }
         let iv = UIImageView()
         iv.image = image
-        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFill
         iv.layer.opacity = 0.7
         return iv
     }()
     
     lazy var firstValueBelow: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 14, weight: .regular)
-        label.textAlignment = .justified
+        label.textAlignment = .center
         label.layer.opacity = 0.5
         return label
     }()
@@ -54,16 +52,15 @@ class TopicDataCell: UITableViewCell {
         guard let image = UIImage(named: "icoViewsSmall") else { fatalError() }
         let iv = UIImageView()
         iv.image = image
-        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFill
         iv.layer.opacity = 0.7
         return iv
     }()
     
     lazy var secondValueBelow: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 14, weight: .regular)
-        label.textAlignment = .justified
+        label.textAlignment = .center
         label.layer.opacity = 0.5
         return label
     }()
@@ -72,26 +69,61 @@ class TopicDataCell: UITableViewCell {
         guard let image = UIImage(named: "icoSmallCalendar") else { fatalError() }
         let iv = UIImageView()
         iv.image = image
-        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFill
         iv.layer.opacity = 0.7
         return iv
     }()
     
     lazy var thirdValueBelow: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 14, weight: .bold)
-        label.textAlignment = .justified
+        label.textAlignment = .center
         label.layer.opacity = 0.5
         return label
+    }()
+    
+    lazy var postsStackView: UIStackView = {
+        
+        let sv = UIStackView(arrangedSubviews: [firstIconBelow, firstValueBelow])
+        sv.axis = .horizontal
+        sv.spacing = 7
+        return sv
+    }()
+    
+    lazy var viewsStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [secondIconBelow, secondValueBelow])
+        sv.axis = .horizontal
+        sv.spacing = 5
+        return sv
+    }()
+    
+    lazy var dateStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [thirdIconBelow, thirdValueBelow])
+        sv.axis = .horizontal
+        sv.spacing = 7
+        return sv
+    }()
+    
+    lazy var metricsStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [postsStackView, viewsStackView, dateStackView])
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.spacing = 10
+        sv.axis = .horizontal
+        return sv
     }()
 
     static let cellIdentifier: String = String(describing: TopicDataCell.self)
     var viewModel: TopicDataCellViewModel? {
         didSet {
             guard let viewModel = viewModel else { return }
-            
+            viewModel.cellViewDelegate = self
             setupUI()
+            
+            if let avatarImage = viewModel.avatarImage{
+                topicImageView.alpha = 1
+                topicImageView.image = avatarImage
+            }
+            
             topicTitleLabel.text = viewModel.topic.title
             firstValueBelow.text = String(viewModel.topic.postsCount)
             secondValueBelow.text = String(viewModel.topic.views)
@@ -103,14 +135,8 @@ class TopicDataCell: UITableViewCell {
     private func setupUI() {
         contentView.addSubview(topicImageView)
         contentView.addSubview(topicTitleLabel)
+        contentView.addSubview(metricsStackView)
         
-        contentView.addSubview(firstIconBelow)
-        contentView.addSubview(firstValueBelow)
-        contentView.addSubview(secondIconBelow)
-        contentView.addSubview(secondValueBelow)
-        contentView.addSubview(thirdIconBelow)
-        contentView.addSubview(thirdValueBelow)
-
         NSLayoutConstraint.activate([
             topicImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             topicImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
@@ -126,45 +152,23 @@ class TopicDataCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            firstIconBelow.leadingAnchor.constraint(equalTo: topicImageView.trailingAnchor, constant: 11),
-            firstIconBelow.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            firstIconBelow.widthAnchor.constraint(equalToConstant: 17),
-            firstIconBelow.heightAnchor.constraint(equalToConstant: 14)
+            metricsStackView.leadingAnchor.constraint(equalTo: topicImageView.trailingAnchor, constant: 11),
+            metricsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15)
         ])
+    }
+}
+
+extension TopicDataCell: TopicDataCellViewDelegate {
+    func onShowingAvatar() {
+        guard let viewModel = self.viewModel else { return }
         
-        NSLayoutConstraint.activate([
-            firstValueBelow.leadingAnchor.constraint(equalTo: firstIconBelow.trailingAnchor, constant: 5),
-            firstValueBelow.centerYAnchor.constraint(equalTo: firstIconBelow.centerYAnchor),
-            firstValueBelow.widthAnchor.constraint(equalToConstant: 14),
-            firstValueBelow.heightAnchor.constraint(equalToConstant: 20)
-        ])
+        guard let avatarImage = viewModel.avatarImage else { return }
+        topicImageView.image = avatarImage
         
-        NSLayoutConstraint.activate([
-            secondIconBelow.leadingAnchor.constraint(equalTo: firstValueBelow.trailingAnchor, constant: 3),
-            secondIconBelow.centerYAnchor.constraint(equalTo: firstIconBelow.centerYAnchor),
-            secondIconBelow.widthAnchor.constraint(equalToConstant: 14),
-            secondIconBelow.heightAnchor.constraint(equalToConstant: 14)
-        ])
-        
-        NSLayoutConstraint.activate([
-            secondValueBelow.leadingAnchor.constraint(equalTo: secondIconBelow.trailingAnchor, constant: 5),
-            secondValueBelow.centerYAnchor.constraint(equalTo: firstIconBelow.centerYAnchor),
-            secondValueBelow.widthAnchor.constraint(equalToConstant: 21),
-            secondValueBelow.heightAnchor.constraint(equalToConstant: 20)
-        ])
-        
-        NSLayoutConstraint.activate([
-            thirdIconBelow.leadingAnchor.constraint(equalTo: secondValueBelow.trailingAnchor),
-            thirdIconBelow.centerYAnchor.constraint(equalTo: firstIconBelow.centerYAnchor),
-            thirdIconBelow.widthAnchor.constraint(equalToConstant: 12),
-            thirdIconBelow.heightAnchor.constraint(equalToConstant: 14)
-        ])
-        
-        NSLayoutConstraint.activate([
-            thirdValueBelow.leadingAnchor.constraint(equalTo: thirdIconBelow.trailingAnchor, constant: 4),
-            thirdValueBelow.centerYAnchor.constraint(equalTo: firstIconBelow.centerYAnchor),
-            thirdValueBelow.widthAnchor.constraint(equalToConstant: 100),
-            thirdValueBelow.heightAnchor.constraint(equalToConstant: 20)
-        ])
+        UIView.animate(withDuration: 2, delay: 0, options: [.curveEaseInOut], animations: { [weak self] in
+            guard let self = self else { return }
+            self.topicImageView.alpha = 1
+        }, completion: nil)
+        self.setNeedsLayout()
     }
 }

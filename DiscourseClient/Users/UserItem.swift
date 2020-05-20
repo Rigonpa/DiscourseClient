@@ -16,6 +16,7 @@ class UserItem: UICollectionViewCell {
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.layer.cornerRadius = 40
         iv.layer.borderWidth = 1
+        iv.alpha = 0
         iv.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
         iv.layer.masksToBounds = true
         return iv
@@ -40,9 +41,9 @@ class UserItem: UICollectionViewCell {
 
             // All dequeues after first time:
             userNameLabel.text = viewModel.user.username
-            guard let avatarData = viewModel.avatarData else { return }
-            profileImageView.image = UIImage(data: avatarData)
-            
+            guard let avatarImage = viewModel.avatarImage else { return }
+            profileImageView.alpha = 1
+            profileImageView.image = avatarImage
         }
     }
     
@@ -69,10 +70,14 @@ extension UserItem: UserViewItemDelegate {
     func userImageFetched() {
         guard let viewModel = viewModel else { return }
         
-        userNameLabel.text = viewModel.user.username
-        guard let avatarData = viewModel.avatarData else { return }
-        profileImageView.image = UIImage(data: avatarData)
+        self.userNameLabel.text = viewModel.user.username
+        guard let avatarImage = viewModel.avatarImage else { return }
+        profileImageView.image = avatarImage
         
+        UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseInOut], animations: { [weak self] in
+            guard let self = self else { return }
+            self.profileImageView.alpha = 1
+            }, completion: nil)
         self.setNeedsLayout()
     }
 }

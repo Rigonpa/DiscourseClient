@@ -6,7 +6,7 @@
 //  Copyright © 2020 Roberto Garrido. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol UserViewItemDelegate {
     func userImageFetched()
@@ -14,14 +14,13 @@ protocol UserViewItemDelegate {
 
 class UsersItemViewModel {
     let user: User
-    var avatarData: Data?
+    var avatarImage: UIImage?
     var viewDelegate: UserViewItemDelegate?
     
     init(user: User) {
         self.user = user
         avatarPathCompleted()
     }
-    
 
     func avatarPathCompleted() {
         let url = "https://mdiscourse.keepcoding.io/"
@@ -32,7 +31,7 @@ class UsersItemViewModel {
             guard let self = self else { return }
             guard let imageData = try? Data(contentsOf: urlCompleted) else { return }
             DispatchQueue.main.async {
-                self.avatarData = imageData
+                self.avatarImage = UIImage(data: imageData)
                 self.viewDelegate?.userImageFetched()
             }
         }

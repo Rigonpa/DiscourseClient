@@ -43,7 +43,12 @@ class TopicsViewModel {
             case .success(let latestTopicsResponse):
                 guard let latestTopicsResponse = latestTopicsResponse else { return }
                 for each in 0...(latestTopicsResponse.topicList.topics.count - 1) {
-                    self.topicViewModels.append(TopicDataCellViewModel(topic: latestTopicsResponse.topicList.topics[each]))
+                    let myUser = latestTopicsResponse.users.filter { (user) -> Bool in
+                        user.username == latestTopicsResponse.topicList.topics[each].lastPoster
+                    }
+                    self.topicViewModels.append(TopicDataCellViewModel(
+                        topic: latestTopicsResponse.topicList.topics[each],
+                        user: myUser[0]))
                 }
                 self.topicViewModels.insert(WelcomeCellViewModel(), at: 0)
                 self.viewDelegate?.topicsFetched()
@@ -66,7 +71,7 @@ class TopicsViewModel {
 
     func didSelectRow(at indexPath: IndexPath) {
         guard indexPath.row < topicViewModels.count else { return } // Para evitar desbordamiento de array
-        guard let topicCellViewModel = topicViewModels[indexPath.row] as? TopicDataCellViewModel else { return }
+        guard let topicCellViewModel = topicViewModels[indexPath.row] as? TopicDataCellViewModel else { return } // Downcasting because of inheritance.
         coordinatorDelegate?.didSelect(topic: topicCellViewModel.topic)
     }
 
@@ -86,7 +91,10 @@ class TopicsViewModel {
             case .success(let latestTopicsResponse):
                 guard let latestTopicsResponse = latestTopicsResponse else { return }
                 for each in 0...latestTopicsResponse.topicList.topics.count - 1 {
-                    self.topicViewModels.append(TopicDataCellViewModel(topic: latestTopicsResponse.topicList.topics[each]))
+                    let myUser = latestTopicsResponse.users.filter { (user) -> Bool in
+                        user.username == latestTopicsResponse.topicList.topics[each].lastPoster
+                    }
+                    self.topicViewModels.append(TopicDataCellViewModel(topic: latestTopicsResponse.topicList.topics[each], user: myUser[0]))
                 }
                 self.viewDelegate?.topicsFetched()
             }
@@ -105,10 +113,42 @@ class TopicsViewModel {
             case .success(let latestTopicsResponse):
                 guard let latestTopicsResponse = latestTopicsResponse else { return }
                 for each in 0...latestTopicsResponse.topicList.topics.count - 1 {
-                    self.topicViewModels.append(TopicDataCellViewModel(topic: latestTopicsResponse.topicList.topics[each]))
+                    let myUser = latestTopicsResponse.users.filter { (user) -> Bool in
+                        user.username == latestTopicsResponse.topicList.topics[each].lastPoster
+                    }
+                    self.topicViewModels.append(TopicDataCellViewModel(topic: latestTopicsResponse.topicList.topics[each], user: myUser[0]))
                 }
                 self.viewDelegate?.topicsFetched()
             }
         }
     }
 }
+
+//extension TopicsViewModel: TopicDataCellViewModelDelegate {
+//    func onSelectingProfileUserImage(lastPoster: String, completion: @escaping (String) -> ()) {
+//        var users: [User] = []
+//        self.topicsDataManager.fetchAllTopics {[weak self] (result) in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let response):
+//                guard let response = response else { return }
+//                for each in 0...response.users.count - 1 {
+//                    users.append(response.users[each])
+//                }
+//                completion(self.onPickingUserAvatar(lastPoster: lastPoster, users: users))
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//                self.viewDelegate?.errorFetchingTopics()
+//                completion("")
+//            }
+//        }
+////        completion(self.onPickingUserAvatar!(lastPoster)) - Closure that won't use but want to keep it here.
+//    }
+//
+//    private func onPickingUserAvatar(lastPoster: String, users: [User]) -> String {
+//        let user = users.filter { (user) -> Bool in
+//            user.username == lastPoster
+//        }
+//        return user[0].avatarTemplate
+//    }
+//}

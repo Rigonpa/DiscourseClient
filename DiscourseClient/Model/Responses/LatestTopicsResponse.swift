@@ -4,9 +4,11 @@ import Foundation
 // Puedes echar un vistazo en https://docs.discourse.org
 
 struct LatestTopicsResponse: Codable {
+    let users: [User]
     let topicList: TopicList
     
     enum CodingKeys: String, CodingKey {
+        case users
         case topicList = "topic_list"
     }
 }
@@ -21,6 +23,7 @@ struct Topic: Codable {
     let postsCount: Int
     let createdAt: String
     let views: Int
+    let lastPoster: String
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -28,5 +31,6 @@ struct Topic: Codable {
         case postsCount = "posts_count"
         case createdAt = "created_at"
         case views
+        case lastPoster = "last_poster_username"
     }
 }

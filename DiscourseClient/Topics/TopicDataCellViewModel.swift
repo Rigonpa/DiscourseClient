@@ -6,23 +6,48 @@
 //  Copyright © 2020 Roberto Garrido. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+protocol TopicDataCellViewDelegate {
+    func onShowingAvatar()
+}
 
 /// ViewModel que representa un topic en la lista
 class TopicDataCellViewModel: TopicCellViewModel {
     
-    let topic: Topic
     var dateAfterFormatter: String?
-    init(topic: Topic) {
+    var cellViewDelegate: TopicDataCellViewDelegate?
+    var avatarImage: UIImage?
+    
+    let topic: Topic
+    let user: User
+    init(topic: Topic, user: User) {
         self.topic = topic
+        self.user = user
         super.init()
         
         self.changingDateFormat(before: topic.createdAt)
+        var imageStringURL = "https://mdiscourse.keepcoding.io"
+        imageStringURL.append(self.user.avatarTemplate.replacingOccurrences(of: "{size}", with: "75"))
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+            guard let self = self else { return }
+            guard let avatarUrl = URL(string: imageStringURL) else { return }
+            
+            do {
+                let imageData = try Data(contentsOf: avatarUrl)
+                self.avatarImage = UIImage(data: imageData)
+                DispatchQueue.main.async {
+                    self.cellViewDelegate?.onShowingAvatar()
+                }
+            } catch (let error) {
+                print(error.localizedDescription)
+            }
+        }
     }
+    
     
     private func changingDateFormat(before: String) {
         
-//        let beforeFormat = "YYYY-MM-DD'T'HH:mm:ss.SSSZ"
         let beforeFormat = "YYYY-MM-dd'T'HH:mm:ss.SSSZ"
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en")
@@ -35,6 +60,5 @@ class TopicDataCellViewModel: TopicCellViewModel {
         let afterFormat = "MMM yy"
         dateFormatter.dateFormat = afterFormat
         dateAfterFormatter = dateFormatter.string(from: beforeDate)
-        
     }
 }
