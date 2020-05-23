@@ -40,6 +40,7 @@ class TopicsViewModel {
             case .failure(let error):
                 print(error.localizedDescription)
                 self.viewDelegate?.errorFetchingTopics()
+                
             case .success(let latestTopicsResponse):
                 guard let latestTopicsResponse = latestTopicsResponse else { return }
                 for each in 0...(latestTopicsResponse.topicList.topics.count - 1) {

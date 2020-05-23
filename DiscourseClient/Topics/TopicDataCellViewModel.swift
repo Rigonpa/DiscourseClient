@@ -26,7 +26,7 @@ class TopicDataCellViewModel: TopicCellViewModel {
         self.user = user
         super.init()
         
-        self.changingDateFormat(before: topic.createdAt)
+        self.changingDateFormat(before: topic.lastPostedAt)
         var imageStringURL = "https://mdiscourse.keepcoding.io"
         imageStringURL.append(self.user.avatarTemplate.replacingOccurrences(of: "{size}", with: "75"))
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in

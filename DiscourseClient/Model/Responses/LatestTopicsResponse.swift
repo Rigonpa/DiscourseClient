@@ -21,16 +21,18 @@ struct Topic: Codable {
     let id: Int
     let title: String
     let postsCount: Int
-    let createdAt: String
-    let views: Int
+    let lastPostedAt: String
     let lastPoster: String
+    let posters: [Poster]
     
     enum CodingKeys: String, CodingKey {
         case id
         case title
         case postsCount = "posts_count"
-        case createdAt = "created_at"
-        case views
+        case lastPostedAt = "last_posted_at"
         case lastPoster = "last_poster_username"
+        case posters
     }
 }
+
+struct Poster: Codable {}

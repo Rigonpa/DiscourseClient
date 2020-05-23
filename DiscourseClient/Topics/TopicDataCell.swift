@@ -90,7 +90,7 @@ class TopicDataCell: UITableViewCell {
         return sv
     }()
     
-    lazy var viewsStackView: UIStackView = {
+    lazy var postersCountStackView: UIStackView = {
         let sv = UIStackView(arrangedSubviews: [secondIconBelow, secondValueBelow])
         sv.axis = .horizontal
         sv.spacing = 5
@@ -105,7 +105,7 @@ class TopicDataCell: UITableViewCell {
     }()
     
     lazy var metricsStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [postsStackView, viewsStackView, dateStackView])
+        let sv = UIStackView(arrangedSubviews: [postsStackView, postersCountStackView, dateStackView])
         sv.translatesAutoresizingMaskIntoConstraints = false
         sv.spacing = 10
         sv.axis = .horizontal
@@ -126,7 +126,7 @@ class TopicDataCell: UITableViewCell {
             
             topicTitleLabel.text = viewModel.topic.title
             firstValueBelow.text = String(viewModel.topic.postsCount)
-            secondValueBelow.text = String(viewModel.topic.views)
+            secondValueBelow.text = String(viewModel.topic.posters.count)
             thirdValueBelow.text = viewModel.dateAfterFormatter
             
         }
