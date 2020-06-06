@@ -35,6 +35,7 @@ class TopicDataCell: UITableViewCell {
         guard let image = UIImage(named: "icoSmallAnswers") else { fatalError() }
         let iv = UIImageView()
         iv.image = image
+        // Si usas scaleAspectFit, quedará mejor, ya que la imagen quedará contenida dentro de su "hueco" dentro del stack, y no sobresaldrá
         iv.contentMode = .scaleAspectFill
         iv.layer.opacity = 0.7
         return iv
@@ -52,6 +53,7 @@ class TopicDataCell: UITableViewCell {
         guard let image = UIImage(named: "icoViewsSmall") else { fatalError() }
         let iv = UIImageView()
         iv.image = image
+        // Si usas scaleAspectFit, quedará mejor, ya que la imagen quedará contenida dentro de su "hueco" dentro del stack, y no sobresaldrá
         iv.contentMode = .scaleAspectFill
         iv.layer.opacity = 0.7
         return iv
@@ -69,6 +71,7 @@ class TopicDataCell: UITableViewCell {
         guard let image = UIImage(named: "icoSmallCalendar") else { fatalError() }
         let iv = UIImageView()
         iv.image = image
+        // Si usas scaleAspectFit, quedará mejor, ya que la imagen quedará contenida dentro de su "hueco" dentro del stack, y no sobresaldrá
         iv.contentMode = .scaleAspectFill
         iv.layer.opacity = 0.7
         return iv

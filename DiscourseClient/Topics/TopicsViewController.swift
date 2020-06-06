@@ -94,6 +94,9 @@ extension TopicsViewController: UITableViewDataSource {
 }
 
 extension TopicsViewController: UITableViewDelegate {
+    /*
+     ¿Hay algún motivo por el que no has usado autosize?
+     */
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return 151
